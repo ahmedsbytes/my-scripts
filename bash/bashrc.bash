@@ -4,7 +4,7 @@
 HISTSIZE=5000
 HISTFILESIZE=10000
 shopt -s histappend
-PROMPT_COMMAND='$PROMPT_COMMAND; history -a'
+export PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
 
 #fzf https://github.com/junegunn/fzf/blob/master/shell/completion.bash
 source /usr/share/fzf/shell/key-bindings.bash 
