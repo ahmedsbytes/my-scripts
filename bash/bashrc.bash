@@ -14,6 +14,8 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 #minikube
 source <(minikube completion bash)
+alias kubectl='minikube kubectl'
+
 #kubectl
 source <(kubectl completion bash)
 #https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases
