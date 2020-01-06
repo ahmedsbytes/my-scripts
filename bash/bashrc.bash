@@ -6,6 +6,9 @@ HISTFILESIZE=10000
 shopt -s histappend
 PROMPT_COMMAND='$PROMPT_COMMAND; history -a'
 
+#fzf https://github.com/junegunn/fzf/blob/master/shell/completion.bash
+source /usr/share/fzf/shell/key-bindings.bash 
+
 #Keep your version of the universe
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
