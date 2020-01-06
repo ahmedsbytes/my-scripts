@@ -6,6 +6,9 @@ HISTFILESIZE=10000
 shopt -s histappend
 PROMPT_COMMAND='$PROMPT_COMMAND; history -a'
 
+#Keep your version of the universe
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
 #minikube
 source <(minikube completion bash)
 #kubectl
