@@ -4,7 +4,14 @@
 HISTSIZE=5000
 HISTFILESIZE=10000
 shopt -s histappend
-export PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
+
+function add_kubectl_context(){
+	KUBE_PS1_SYMBOL_IMG=$'\xE2\x98\xB8 '
+	KUBECTL_CURRENT_CONTENT=$(kubectl config view | grep current-context | sed -e "s|current-context: ||g" | tr -d "\n\r")
+	PS1="${KUBE_PS1_SYMBOL_IMG}${KUBECTL_CURRENT_CONTENT}$PS1"
+}
+
+export PROMPT_COMMAND="${PROMPT_COMMAND:-true}; add_kubectl_context;history -a"
 
 #Keep your version of the universe
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
@@ -29,7 +36,6 @@ source /usr/share/fzf/shell/key-bindings.bash
 
 #minikube
 source <(minikube completion bash)
-alias kubectl='minikube kubectl'
 
 #kubectl
 source <(kubectl completion bash)
