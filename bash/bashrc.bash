@@ -4,17 +4,18 @@
 HISTSIZE=5000
 HISTFILESIZE=10000
 shopt -s histappend
-
-function add_kubectl_context(){
-	KUBE_PS1_SYMBOL_IMG=$'\xE2\x98\xB8 '
-	KUBECTL_CURRENT_CONTENT=$(kubectl config view | grep current-context | sed -e "s|current-context: ||g" | tr -d "\n\r")
-	PS1="${KUBE_PS1_SYMBOL_IMG}${KUBECTL_CURRENT_CONTENT}$PS1"
-}
-
-export PROMPT_COMMAND="${PROMPT_COMMAND:-true}; add_kubectl_context;history -a"
+PROMPT_COMMAND="history -a"
 
 #Keep your version of the universe
-export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+PATH="$PATH:/home/amaabdou/.cargo/bin"
+PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+PATH=$PATH:$(go env GOPATH)/bin
+PATH=$PATH:/var/lib/snapd/snap/bin
+PATH=$PATH:~/.local/flutter/bin
+PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator
+export PATH
 
 ## my git short functions
 function git_branch_name() { 
@@ -33,12 +34,8 @@ alias gmum='git fetch upstream master && git merge upstream/master'
 
 #fzf https://github.com/junegunn/fzf/blob/master/shell/completion.bash
 source /usr/share/fzf/shell/key-bindings.bash 
-
-#minikube
-source <(minikube completion bash)
-
-#kubectl
-source <(kubectl completion bash)
+source <(minikube completion bash) #minikube
+source <(kubectl completion bash) #kubectl
 #https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases
 source $HOME/.bashrc.d/kubectl_aliases
 complete -o default -F __start_kubectl k
