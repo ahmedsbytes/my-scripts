@@ -44,7 +44,7 @@ function _ps1_nonzero_return() {
 
 KUBE_PS1_SYMBOL_IMG=$'\xE2\x98\xB8 '		
 function _ps1_kubectl() {
-	KUBECTL_CURRENT_CONTENT=$(kubectl config view | grep current-context | sed -e "s|current-context: ||g" | tr -cd '[:alnum:]._-')
+	echo $(kubectl config view | grep current-context | sed -e "s|current-context: ||g" | tr -cd '[:alnum:]._-')
 }
 
 
